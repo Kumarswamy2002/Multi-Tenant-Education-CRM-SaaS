@@ -6,7 +6,7 @@ from app.database import init_db
 from app.middleware import TenantSecurityMiddleware
 from app.api.v1 import (
     auth, organizations, people, leads, admissions, cases,
-    workflows, career, analytics, ai
+    workflows, career, analytics, ai, search, custom_objects, integrations
 )
 
 logging.basicConfig(
@@ -46,6 +46,9 @@ app.include_router(workflows.router, prefix=settings.API_V1_STR)
 app.include_router(career.router, prefix=settings.API_V1_STR)
 app.include_router(analytics.router, prefix=settings.API_V1_STR)
 app.include_router(ai.router, prefix=settings.API_V1_STR)
+app.include_router(search.router, prefix=settings.API_V1_STR)
+app.include_router(custom_objects.router, prefix=settings.API_V1_STR)
+app.include_router(integrations.router, prefix=settings.API_V1_STR)
 
 
 @app.on_event("startup")
