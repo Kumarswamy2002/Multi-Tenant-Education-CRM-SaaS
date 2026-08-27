@@ -3,7 +3,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.middleware import TenantSecurityMiddleware
-from app.api.v1 import auth, organizations, people, leads, admissions, cases
+from app.api.v1 import (
+    auth, organizations, people, leads, admissions, cases,
+    workflows, career, analytics, ai
+)
 
 logging.basicConfig(
     level=settings.LOG_LEVEL,
@@ -38,6 +41,10 @@ app.include_router(people.router, prefix=settings.API_V1_STR)
 app.include_router(leads.router, prefix=settings.API_V1_STR)
 app.include_router(admissions.router, prefix=settings.API_V1_STR)
 app.include_router(cases.router, prefix=settings.API_V1_STR)
+app.include_router(workflows.router, prefix=settings.API_V1_STR)
+app.include_router(career.router, prefix=settings.API_V1_STR)
+app.include_router(analytics.router, prefix=settings.API_V1_STR)
+app.include_router(ai.router, prefix=settings.API_V1_STR)
 
 
 @app.get("/")
