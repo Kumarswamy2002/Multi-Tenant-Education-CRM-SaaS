@@ -7,12 +7,12 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func, and_, or_
 from fastapi import HTTPException, status
 
-from backend.app.models.academics_enterprise import (
+from app.models.academics_enterprise import (
     Department, AcademicProgram, AcademicTerm, Course, CourseSection,
     SectionSchedule, StudentEnrollment, AttendanceRecord, CoursePrerequisite,
     EnrollmentStatus, AttendanceStatus, GradeScale
 )
-from backend.app.schemas.academics_enterprise import (
+from app.schemas.academics_enterprise import (
     DepartmentCreate, DepartmentUpdate, AcademicProgramCreate, AcademicProgramUpdate,
     AcademicTermCreate, AcademicTermUpdate, CourseCreate, CourseUpdate,
     CourseSectionCreate, CourseSectionUpdate, StudentEnrollmentCreate,

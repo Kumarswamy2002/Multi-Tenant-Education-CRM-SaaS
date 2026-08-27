@@ -7,11 +7,11 @@ import math
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
-from backend.app.models.ai_workflows_enterprise import (
+from app.models.ai_workflows_enterprise import (
     StudentRetentionRisk, LeadScoreProfile, RiskLevel
 )
-from backend.app.models.academics_enterprise import StudentEnrollment, AttendanceRecord
-from backend.app.models.billing_enterprise import StudentInvoice, InvoiceStatus
+from app.models.academics_enterprise import StudentEnrollment, AttendanceRecord
+from app.models.billing_enterprise import StudentInvoice, InvoiceStatus
 
 
 class AIAnalyticsService:

@@ -4,8 +4,8 @@ Pydantic Schemas for Tuition Billing, Fee Structures, Invoices, Payments, and Sc
 from typing import Optional, List, Dict, Any
 from datetime import date, datetime
 from pydantic import Field
-from backend.app.schemas.base_enterprise import BaseSchema, AuditSchema
-from backend.app.models.billing_enterprise import InvoiceStatus, PaymentMethod, TransactionStatus, FeeFrequency
+from app.schemas.base_enterprise import BaseSchema, AuditSchema
+from app.models.billing_enterprise import InvoiceStatus, PaymentMethod, TransactionStatus, FeeFrequency
 
 
 class FeeStructureItemSchema(BaseSchema):

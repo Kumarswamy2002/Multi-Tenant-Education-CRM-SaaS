@@ -8,12 +8,12 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func, and_, or_
 from fastapi import HTTPException
 
-from backend.app.models.billing_enterprise import (
+from app.models.billing_enterprise import (
     FeeStructure, FeeStructureItem, StudentInvoice, InvoiceLineItem,
     PaymentTransaction, Scholarship, ScholarshipAward,
     InvoiceStatus, PaymentMethod, TransactionStatus
 )
-from backend.app.schemas.billing_enterprise import (
+from app.schemas.billing_enterprise import (
     FeeStructureCreate, StudentInvoiceCreate, PaymentTransactionCreate, ScholarshipCreate
 )
 

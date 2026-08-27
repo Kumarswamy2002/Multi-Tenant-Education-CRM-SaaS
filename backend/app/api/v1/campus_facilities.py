@@ -6,9 +6,9 @@ from typing import List, Optional, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
-from backend.app.database import get_db
-from backend.app.context import get_current_tenant_id, get_current_user
-from backend.app.schemas.base_enterprise import APIResponse, PaginatedResponse
+from app.database import get_db
+from app.context import get_current_tenant_id, get_current_user
+from app.schemas.base_enterprise import APIResponse, PaginatedResponse
 
 router = APIRouter(prefix="/campus-facilities", tags=["Campus Facilities"])
 

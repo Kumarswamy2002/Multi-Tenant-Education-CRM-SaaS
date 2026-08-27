@@ -4,8 +4,8 @@ Pydantic Schemas for Academics, Programs, Courses, Sections, Enrollments, Grades
 from typing import Optional, List, Dict, Any
 from datetime import date, time, datetime
 from pydantic import Field
-from backend.app.schemas.base_enterprise import BaseSchema, AuditSchema
-from backend.app.models.academics_enterprise import ProgramType, CourseType, GradeScale, EnrollmentStatus, AttendanceStatus
+from app.schemas.base_enterprise import BaseSchema, AuditSchema
+from app.models.academics_enterprise import ProgramType, CourseType, GradeScale, EnrollmentStatus, AttendanceStatus
 
 
 # Department Schemas

@@ -10,7 +10,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 import enum
-from backend.app.models.base_enterprise import BaseModel, Base
+from app.models.base_enterprise import BaseModel, Base
 
 
 class RiskLevel(str, enum.Enum):

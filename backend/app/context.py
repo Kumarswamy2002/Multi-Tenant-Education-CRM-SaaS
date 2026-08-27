@@ -57,3 +57,13 @@ class TenantContext:
         _user_id_ctx.set(None)
         _user_roles_ctx.set([])
         _is_super_admin_ctx.set(False)
+
+
+def get_current_tenant_id() -> str:
+    tid = TenantContext.get_tenant_id()
+    return tid or "default-tenant"
+
+
+def get_current_user() -> Optional[str]:
+    return TenantContext.get_user_id()
+

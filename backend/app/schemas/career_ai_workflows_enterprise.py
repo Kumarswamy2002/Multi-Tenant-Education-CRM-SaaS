@@ -4,9 +4,9 @@ Pydantic Schemas for Career Services, AI Retention/Scoring, and Workflow Automat
 from typing import Optional, List, Dict, Any
 from datetime import date, datetime
 from pydantic import Field
-from backend.app.schemas.base_enterprise import BaseSchema, AuditSchema
-from backend.app.models.career_enterprise import JobType, JobApplicationStatus
-from backend.app.models.ai_workflows_enterprise import RiskLevel
+from app.schemas.base_enterprise import BaseSchema, AuditSchema
+from app.models.career_enterprise import JobType, JobApplicationStatus
+from app.models.ai_workflows_enterprise import RiskLevel
 
 
 # Career & Jobs
