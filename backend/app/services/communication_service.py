@@ -43,7 +43,7 @@ class CommunicationEngine:
         body = tpl["body"]
 
         for key, val in merge_vars.items():
-            pattern = rf"\{\{\s*{key}\s*\}\}"
+            pattern = r"\{\{\s*" + re.escape(str(key)) + r"\s*\}\}"
             subject = re.sub(pattern, str(val), subject)
             body = re.sub(pattern, str(val), body)
 

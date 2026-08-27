@@ -18,8 +18,17 @@ class MFAEngine:
         return random_bytes.replace("=", "")
 
     @staticmethod
-    def generate_totp(secret: str, time_step: int = 30) -> str:
-        key = base64.b32decode(secret + '=' * (8 - len(secret) % 8), True)
+    def _pad_base32(s: str) -> str:
+        s = s.strip().upper()
+        rem = len(s) % 8
+        if rem != 0:
+            s += '=' * (8 - rem)
+        return s
+
+    @classmethod
+    def generate_totp(cls, secret: str, time_step: int = 30) -> str:
+        padded_secret = cls._pad_base32(secret)
+        key = base64.b32decode(padded_secret, True)
         counter = int(time.time() // time_step)
         msg = struct.pack(">Q", counter)
         h = hmac.new(key, msg, hashlib.sha1).digest()
@@ -31,14 +40,16 @@ class MFAEngine:
     def verify_totp(cls, secret: str, user_code: str, time_step: int = 30) -> bool:
         if not secret or not user_code:
             return False
+        padded_secret = cls._pad_base32(secret)
+        key = base64.b32decode(padded_secret, True)
         # Allow +/- 1 time step window for clock drift tolerance
         for offset in [-1, 0, 1]:
             counter = int((time.time() // time_step) + offset)
-            key = base64.b32decode(secret + '=' * (8 - len(secret) % 8), True)
             msg = struct.pack(">Q", counter)
             h = hmac.new(key, msg, hashlib.sha1).digest()
             off = h[-1] & 0x0F
             code = (struct.unpack(">I", h[off:off + 4])[0] & 0x7FFFFFFF) % 1000000
-            if f"{code:06d}" == user_code:
+            if f"{code:06d}" == str(user_code).strip():
                 return True
         return False
+
