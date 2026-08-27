@@ -74,7 +74,7 @@ campussphere/
 
 ### Environment Setup
 ```bash
-cp .env.example .env
+cp example.env .env
 ```
 
 ### Running with Docker Compose
