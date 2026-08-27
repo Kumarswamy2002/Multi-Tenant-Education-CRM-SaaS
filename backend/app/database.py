@@ -8,14 +8,19 @@ logger = logging.getLogger(__name__)
 
 DATABASE_URL = settings.get_database_url()
 
-engine = create_async_engine(
-    DATABASE_URL,
-    echo=False,
-    future=True,
-    pool_pre_ping=True,
-    pool_size=20,
-    max_overflow=10,
-)
+engine_kwargs = {
+    "echo": False,
+    "future": True,
+}
+
+if not DATABASE_URL.startswith("sqlite"):
+    engine_kwargs.update({
+        "pool_pre_ping": True,
+        "pool_size": 20,
+        "max_overflow": 10,
+    })
+
+engine = create_async_engine(DATABASE_URL, **engine_kwargs)
 
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
@@ -26,6 +31,12 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 Base = declarative_base()
+
+
+async def init_db():
+    import app.models  # Register all models on Base.metadata
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:

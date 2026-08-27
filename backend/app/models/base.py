@@ -1,7 +1,6 @@
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import Column, String, DateTime, ForeignKey, Index
-from sqlalchemy.orm import declared_attr
+from sqlalchemy import Column, String, DateTime
 from app.database import Base
 from app.context import TenantContext
 
@@ -27,12 +26,6 @@ class TenantBaseModel(BaseModel):
     __abstract__ = True
 
     tenant_id = Column(String(36), index=True, nullable=False)
-
-    @declared_attr
-    def __table_args__(cls):
-        return (
-            Index(f"ix_{cls.__tablename__}_tenant_id", "tenant_id"),
-        )
 
     def __init__(self, **kwargs):
         if "tenant_id" not in kwargs or not kwargs["tenant_id"]:

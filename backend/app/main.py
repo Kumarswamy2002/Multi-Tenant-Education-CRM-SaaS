@@ -2,6 +2,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
+from app.database import init_db
 from app.middleware import TenantSecurityMiddleware
 from app.api.v1 import (
     auth, organizations, people, leads, admissions, cases,
@@ -45,6 +46,13 @@ app.include_router(workflows.router, prefix=settings.API_V1_STR)
 app.include_router(career.router, prefix=settings.API_V1_STR)
 app.include_router(analytics.router, prefix=settings.API_V1_STR)
 app.include_router(ai.router, prefix=settings.API_V1_STR)
+
+
+@app.on_event("startup")
+async def on_startup():
+    logger.info("Initializing database schemas...")
+    await init_db()
+    logger.info("Database schemas ready!")
 
 
 @app.get("/")

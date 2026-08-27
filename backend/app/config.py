@@ -67,7 +67,8 @@ class Settings(BaseSettings):
     def get_database_url(self) -> str:
         if self.DATABASE_URL:
             return self.DATABASE_URL
-        return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+        # Default to local SQLite async for instant local execution
+        return "sqlite+aiosqlite:///./campussphere.db"
 
     def get_redis_url(self) -> str:
         if self.REDIS_URL:
